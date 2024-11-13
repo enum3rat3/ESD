@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    
+}
+
+.main{
+    background-image: url('images/bg.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px;
+    background: rgba(0, 0, 0, 0.5);
+}
+header img{
+    height: 35px;
+    width: 35px;
+    
+}
+.logo {
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FF4D4D;
+    margin-left: 5px;
+}
+.logo span{
+    margin-left: 10px;
+}
+.nav{
+    margin-right: 50px;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #FF4D4D;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #FF4D4D;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e03a3a;
+}
+
+.menu-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 100px;
+    margin-top: 30px;
+    
+    color: black;
+    gap: 10%;
+    
+}
+.card{
+    border-top-right-radius: 100px;
+    border-top-left-radius: 100px;
+    width: 250px;
+    height: 300px;
+    background-color: orange;
+    margin-top:30px ;
+}
+.card img{
+    width: 330px;
+    height:150px;
+    border-radius: 10px;;
+    position:abolute; 
+    margin-left: -20px;
+    margin-top:-15px;
+}
+.dp{
+    display: flex;
+}
+.card h2{
+    margin-top: 10px;
+    margin-left:10px ;
+}
+.card .price{
+    margin-top: 10px;
+
+}
+.card .desc{
+    float: left;
+    width: 50%;
+    margin-right: 50px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.cartrating{
+    display: flex;
+    
+    margin-top: 10px;
+}
+.cartbtn{
+    margin-left: 10px;
+    width: fit-content;
+    padding: 5px;
+    background-color: #e03a3a;
+    border: none;
+    border-radius: 5px;
+}
+
+.cartbtn:hover{
+    background-color:white;
+}
+.rating{
+    margin-left: 80px;
+}
+
+footer{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+    color: black;
+    background-color: orange;
+}
+
+.card_parent_1{
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 30px;
+    
+}
