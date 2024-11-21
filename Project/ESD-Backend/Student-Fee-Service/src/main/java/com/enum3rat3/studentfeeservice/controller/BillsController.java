@@ -46,6 +46,6 @@ public class BillsController {
         {
             return "Bill details deleted for " + studentId;
         }
-        return "Bill delete failed either invalid " + studentId + " or " + " invalid billId " + billId;
+        return "Unable to delete bill failed either invalid " + studentId + " or " + " invalid billId " + billId;
     }
 }
