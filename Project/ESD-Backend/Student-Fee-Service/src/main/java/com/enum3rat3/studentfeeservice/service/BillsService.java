@@ -1,14 +1,13 @@
 package com.enum3rat3.studentfeeservice.service;
 
-import com.enum3rat3.studentfeeservice.model.Bills;
-import com.enum3rat3.studentfeeservice.model.Student;
-import com.enum3rat3.studentfeeservice.model.StudentBillDetails;
-import com.enum3rat3.studentfeeservice.model.StudentBills;
+import com.enum3rat3.studentfeeservice.model.*;
 import com.enum3rat3.studentfeeservice.repo.BillsRepo;
 import com.enum3rat3.studentfeeservice.repo.StudentBillsRepo;
+import com.enum3rat3.studentfeeservice.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,8 +20,12 @@ public class BillsService {
 
     @Autowired
     private StudentService studentService;
+
     @Autowired
     private StudentBillsRepo studentBillsRepo;
+
+    @Autowired
+    private StudentRepo studentRepo;
 
     public void createBill(StudentBillDetails studentBillDetails) {
 
@@ -75,5 +78,27 @@ public class BillsService {
             return true;
         }
         return false;
+    }
+
+    public void createBillForDomain(DomainBillDetails domainBillDetails) {
+        int dID = domainBillDetails.getDomainId();
+
+        List<Student> students= studentRepo.findAllByDomainId(dID);
+
+        for(Student student : students) {
+            // Storing in bills table
+            Bills bill = new Bills();
+            bill.setDescription(domainBillDetails.getDescription());
+            bill.setAmount(domainBillDetails.getAmount());
+            bill.setBillDate(domainBillDetails.getBillDate());
+            bill.setDeadline(domainBillDetails.getDeadline());
+            Bills tempBill = billsRepo.save(bill);
+
+            // Storing in student_bills table
+            StudentBills studentBills = new StudentBills();
+            studentBills.setBillId(tempBill.getId());
+            studentBills.setStudentId(student.getStudentId());
+            studentBillsRepo.save(studentBills);
+        }
     }
 }

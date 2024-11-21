@@ -21,4 +21,7 @@ public class StudentService {
         return studentRepo.findById(studentID).get();
     }
 
+    public Student createStudent(Student student) {
+        return studentRepo.save(student);
+    }
 }

@@ -2,6 +2,7 @@ package com.enum3rat3.studentfeeservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +16,6 @@ import lombok.NoArgsConstructor;
 public class Student {
     @Id
     private String studentId;
-    private String domain;
+
+    private int domainId;
 }

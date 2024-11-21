@@ -48,4 +48,12 @@ public class BillsController {
         }
         return "Unable to delete bill failed either invalid " + studentId + " or " + " invalid billId " + billId;
     }
+
+    // ********************* Domain Related Operation ******************
+    @PostMapping("create/domain/")
+    private String createBill(@RequestBody DomainBillDetails domainBillDetails) {
+        billsService.createBillForDomain(domainBillDetails);
+
+        return "Bill created for " + domainBillDetails.getDomainId();
+    }
 }

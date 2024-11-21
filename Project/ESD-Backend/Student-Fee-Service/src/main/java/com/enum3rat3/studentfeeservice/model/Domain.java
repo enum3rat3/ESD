@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "student_bills")
-public class StudentBills {
+@Table(name = "domain")
+public class Domain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int dominId;
 
-    private int billId;
-    private String studentId;
+    private String program;
 }
