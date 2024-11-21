@@ -65,4 +65,15 @@ public class BillsService {
         }
         return false;
     }
+
+    public boolean deleteBill(String studentId, int billId) {
+        StudentBills studentBills = studentBillsRepo.findByBillIdAndStudentId(billId, studentId);
+        if(studentBills != null)
+        {
+            studentBillsRepo.delete(studentBills);
+            billsRepo.deleteById(billId);
+            return true;
+        }
+        return false;
+    }
 }

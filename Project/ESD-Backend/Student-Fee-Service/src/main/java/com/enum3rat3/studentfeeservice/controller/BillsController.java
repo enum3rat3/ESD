@@ -39,4 +39,13 @@ public class BillsController {
         }
         return "Bill update failed either invalid " + studentId + " or " + " invalid billId " + billId;
     }
+
+    @DeleteMapping("delete/{studentId}/{billId}")
+    private String deleteBill(@PathVariable String studentId, @PathVariable int billId) {
+        if(billsService.deleteBill(studentId, billId))
+        {
+            return "Bill details deleted for " + studentId;
+        }
+        return "Bill delete failed either invalid " + studentId + " or " + " invalid billId " + billId;
+    }
 }
