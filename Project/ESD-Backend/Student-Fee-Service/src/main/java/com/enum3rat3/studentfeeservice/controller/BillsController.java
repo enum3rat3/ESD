@@ -56,4 +56,10 @@ public class BillsController {
 
         return "Bill created for " + domainBillDetails.getDomainId();
     }
+
+    @GetMapping("read/domain/{domainId}")
+    private List<Bills> readBillsForDomain(@PathVariable int domainId) {
+        return billsService.readBillsForDomain(domainId);
+    }
+
 }

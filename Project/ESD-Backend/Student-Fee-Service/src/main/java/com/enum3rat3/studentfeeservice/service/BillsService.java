@@ -101,4 +101,18 @@ public class BillsService {
             studentBillsRepo.save(studentBills);
         }
     }
+
+    public List<Bills> readBillsForDomain(int domainId) {
+        List<Student> students= studentRepo.findAllByDomainId(domainId);
+
+        List<Bills> bills = new ArrayList<>();
+        for(Student student : students) {
+            List<StudentBills> sb = studentBillsRepo.findBystudentId(student.getStudentId());
+            for(StudentBills studentBills : sb) {
+                bills.add(billsRepo.findById(studentBills.getBillId()).orElse(null));
+            }
+        }
+
+        return bills;
+    }
 }
