@@ -14,7 +14,7 @@ public class StudentBillsController {
     @Autowired
     private StudentBillsService studentBillsService;
 
-        @GetMapping("/{studentId}")
+    @GetMapping("/{studentId}")
     private List<Integer> readBills(@PathVariable String studentId) {
         return studentBillsService.readBills(studentId);
     }
