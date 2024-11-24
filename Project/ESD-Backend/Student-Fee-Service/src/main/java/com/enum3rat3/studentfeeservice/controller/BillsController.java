@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/bills")
 public class BillsController {
     @Autowired
@@ -97,7 +98,6 @@ public class BillsController {
             throw new Exception("jwt required...");
         }
         User user = userService.getUserProfileHandler(jwt);
-
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
         }

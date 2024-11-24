@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate} from 'react-router-dom';
 import Navbar from '../layout/navbar';
 
 export default function Home() {
+    const navigate = useNavigate();
     const [bill, setBill] = useState([])
     const [studentId, setStudentId] = useState("");
-
+    
     useEffect(() => {
         loadBills();
     },[]);
@@ -21,7 +22,12 @@ export default function Home() {
 
     const deleteBill = async(studentID, id)=>{
         await axios.delete(`http://localhost:8080/api/bills/delete/${studentID}/${id}`);
-        loadBills();
+        loadBills(studentID);
+    }
+
+    const updateBill = (id, description, amount, billDate, deadline, studentId) =>
+    {
+        navigate("/update", {state : {billId: id, description: description, amount: amount, billDate: billDate, deadline: deadline, studentId: studentId}});
     }
 
     useEffect(() => {
@@ -56,12 +62,12 @@ export default function Home() {
                     <th scope="col">Amount</th>
                     <th scope="col">Bill Date</th>
                     <th scope="col">Deadline</th>
-                    <th scope="col">Student ID</th>
+                    <th scope="col">Delete / Update</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    bill.map((bills, index) => (
+                    bill.map((bills, key) => (
                         <tr>
                             <td>{bills.id}</td>
                             <td>{bills.description}</td>
@@ -71,8 +77,12 @@ export default function Home() {
                             {/*<td>{bills.studentID}</td>*/}
                             <td>
                                 <button className="btn btn-danger mx-2"
-                                        onClick={() => deleteBill(101, bills.id)}
+                                        onClick={() => deleteBill(studentId, bills.id)}
                                 >Delete
+                                </button>
+                                <button className="btn btn-warning mx-2"
+                                        onClick={() => updateBill(bills.id, bills.description, bills.amount, bills.billDate, bills.deadline, studentId)}
+                                >Update
                                 </button>
                             </td>
                         </tr>

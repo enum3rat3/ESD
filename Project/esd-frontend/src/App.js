@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Components/login';
 import Home from './Components/home';
+import RouteGuard from './Components/routeGuard'
 import AddSingleBill from './Components/addSingleBill';
 import AddBillToDomain from './Components/addBillToDomain';
 import Update from './Components/update';

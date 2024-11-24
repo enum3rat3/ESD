@@ -45,7 +45,6 @@ public class ApplicationConfiguration {
                 config.setAllowedOrigins(
                         Arrays.asList(
                                 "http://localhost:3000"
-
                         )
                 );
                 config.setAllowedMethods(Collections.singletonList("*"));

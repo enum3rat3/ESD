@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar2 from '../layout/navbar2';
 import {setAuthToken} from "../helpers/setAuthToken";
@@ -13,7 +13,7 @@ export default function Login() {
         password:""
     });
 
-    const{email, password}=log;
+    const{email, password} = log;
 
     const onInputChange=(e)=>{
         setlog({...log,[e.target.name]:e.target.value})
@@ -27,7 +27,7 @@ export default function Login() {
                 setAuthToken(res.data.jwt)
             }
         )
-        navigate("/home")
+        navigate('/home')
     };
 
     return (
