@@ -21,12 +21,13 @@ export default function Login() {
 
     const onSubmit = async (e)=>{
         e.preventDefault();
-        const res = await axios.post(`http://localhost:5001/auth/signin`, log).then(
+        const res = await axios.post(`http://localhost:8080/auth/signin`, log).then(
             (res)=>{
                 localStorage.setItem("token", res.data.jwt)
                 setAuthToken(res.data.jwt)
             }
         )
+        console.log(res);
         navigate('/home')
     };
 

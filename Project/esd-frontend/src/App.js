@@ -3,7 +3,6 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Login from './Components/login';
 import Home from './Components/home';
-import RouteGuard from './Components/routeGuard'
 import AddSingleBill from './Components/addSingleBill';
 import AddBillToDomain from './Components/addBillToDomain';
 import Update from './Components/update';
@@ -20,8 +19,6 @@ function App() {
       <div className="App">
         <Router history={history}>
             <Routes>
-        {/*    <Switch>*/}
-        {/*      <RouteGuard exact path="/home" component={<Home />} />*/}
             <Route exact path="/" element={<Login />} />
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/addSingleBill" element={<AddSingleBill />} />
@@ -29,7 +26,6 @@ function App() {
             <Route exact path="/update" element={<Update />} />
             <Route exact path="/login" element={<Login />} />
             </Routes>
-        {/*    </Switch>*/}
         </Router>
       </div>
   );

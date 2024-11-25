@@ -1,6 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 export default function Navbar() {
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+    }
+    const navigate = useNavigate();
+
+    if(!localStorage.getItem("token"))
+        navigate("/login")
+   
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: '#ff6600'}}>
@@ -20,8 +29,7 @@ export default function Navbar() {
                         </ul>
                     </div>
 
-
-                    <Link className='btn btn-outline-light mx-2' to="/login">
+                    <Link className='btn btn-outline-light mx-2' onClick={handleLogout}>
                         Logout
                     </Link>
                 </div>

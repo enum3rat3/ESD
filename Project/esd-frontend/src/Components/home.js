@@ -7,16 +7,18 @@ export default function Home() {
     const navigate = useNavigate();
     const [bill, setBill] = useState([])
     const [studentId, setStudentId] = useState("");
-    
+
+    if(!localStorage.getItem("token"))
+    {
+        window.location.href = "http://localhost:3000/login"
+    }
+
     useEffect(() => {
         loadBills();
     },[]);
 
     const loadBills = async(studentID)=>{
-        const result = await axios.get(`http://localhost:8080/api/bills/read/${studentID}`,
-            {
-                headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`}
-            });
+        const result = await axios.get(`http://localhost:8080/api/bills/read/${studentID}`);
         setBill(result.data);
     }
 

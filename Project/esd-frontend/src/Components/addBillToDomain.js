@@ -15,6 +15,11 @@ export default function AddBillToDomainID() {
         domainId:"",
     });
 
+    if(!localStorage.getItem("token"))
+    {
+        window.location.href = "http://localhost:3000/login"
+    }
+    
     const{description, amount, billDate, deadline, domainId}= bill
 
     const onInputChange=(e)=>{
@@ -23,7 +28,7 @@ export default function AddBillToDomainID() {
 
     const onSubmit = async (e)=>{
         e.preventDefault();
-        await axios.post('http://localhost:8080/api/bills/create/domain/', bill)
+        await axios.post('http://localhost:8080/api/bills/create/domain/', bill);
         navigate("/home")
     };
 

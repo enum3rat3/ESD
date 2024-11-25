@@ -23,10 +23,15 @@ export default function Update() {
         setBill({...bill,[e.target.name]:e.target.value})
     };
 
+    if(!localStorage.getItem("token"))
+    {
+        window.location.href = "http://localhost:3000/login"
+    }
+    
     const onSubmit = async (billId)=>{
         await axios.put(`http://localhost:8080/api/bills/update/${studentID}/${billId}`, bill)
-            .then(response => response.status)
-            .catch(err => console.warn(err))
+        .then(response => response.status)
+        .catch(err => console.warn(err))
 
         navigate("/home")
     };

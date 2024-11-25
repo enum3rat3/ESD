@@ -16,6 +16,10 @@ export default function AddSingleBill() {
         }
     );
 
+    if(!localStorage.getItem("token"))
+    {
+        window.location.href = "http://localhost:3000/login"
+    }
     const { description, amount, billDate, deadline, studentID } = bill
 
     const onInputChange = (e) => {

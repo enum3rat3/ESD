@@ -28,7 +28,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
 
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
@@ -43,7 +43,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
 
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
@@ -59,7 +59,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
 
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
@@ -78,7 +78,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
 
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
@@ -97,7 +97,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
         }
@@ -111,7 +111,7 @@ public class BillsController {
         if(jwt == null){
             throw new Exception("jwt required...");
         }
-        User user = userService.getUserProfileHandler(jwt);
+        User user = userService.findUserProfileByJwt(jwt);
 
         if(user == null){
             throw new Exception("UNAUTHORIZED CREDENTIALS");
