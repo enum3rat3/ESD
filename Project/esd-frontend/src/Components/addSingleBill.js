@@ -1,16 +1,21 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from '../layout/navbar';
 
 export default function AddSingleBill() {
 
     const navigate = useNavigate();
+    let currDate = new Date();
+    currDate = currDate.getFullYear() + "-" + parseInt(currDate.getMonth()+1) + "-" + currDate.getDate();
+
 
     const [bill, setBill] = useState({
             description:"",
             amount:"",
-            billDate:"",
+            billDate:currDate,
             deadline:"",
             studentID:""
         }
@@ -24,17 +29,25 @@ export default function AddSingleBill() {
 
     const onInputChange = (e) => {
         setBill({ ...bill, [e.target.name]: e.target.value })
+
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:8080/api/bills/create', bill)
-        navigate("/home")
+        try{
+            const response = await axios.post('http://localhost:8080/api/bills/create', bill);
+            // navigate("/home");
+            toast.success("Billed for student id: " + bill.studentID);
+        }
+        catch (error) {
+            toast.error(error.response.data.message);
+        }
     };
 
 
     return (
         <div>
+            <ToastContainer />
             <Navbar/>
             <div className="container">
                 <div className='row d-inline'>
@@ -68,36 +81,25 @@ export default function AddSingleBill() {
                             </div>
 
                             <div className='mb-3'>
-                                <label htmlFor="credits_required" className='form-label'>
-                                    Date
-                                </label>
-                                <input type={"text"}
-                                       className="form-control"
-                                       placeholder="Enter bill date"
-                                       name="billDate"
-                                       value={billDate}
-                                       onChange={(e) => onInputChange(e)} />
-                            </div>
-
-                            <div className='mb-3'>
                                 <label htmlFor="description" className='form-label'>
                                     Deadline
                                 </label>
-                                <input type={"text"}
+                                <input type={"date"}
                                        className="form-control"
                                        placeholder="Enter deadline"
                                        name="deadline"
                                        value={deadline}
+                                       min={currDate}
                                        onChange={(e) => onInputChange(e)} />
                             </div>
 
                             <div className='mb-3'>
                                 <label htmlFor="name" className='form-label'>
-                                    Student_id
+                                    Student ID
                                 </label>
                                 <input type={"text"}
                                        className="form-control"
-                                       placeholder="Enter student_id"
+                                       placeholder="Enter student ID"
                                        name="studentID"
                                        value={studentID}
                                        onChange={(e) => onInputChange(e)} />
@@ -106,7 +108,7 @@ export default function AddSingleBill() {
                             <button type="submit" className='btn btn-outline-primary'>
                                 Add
                             </button>
-
+                            
                             <Link className='btn btn-outline-danger mx-2' to="/home" >
                                 Cancel
                             </Link>

@@ -3,7 +3,6 @@ package com.enum3rat3.studentfeeservice.controller;
 import com.enum3rat3.studentfeeservice.config.JwtProvider;
 import com.enum3rat3.studentfeeservice.model.AuthResponse;
 import com.enum3rat3.studentfeeservice.model.LoginRequest;
-import com.enum3rat3.studentfeeservice.repo.UserRepo;
 import com.enum3rat3.studentfeeservice.service.CustomerUserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

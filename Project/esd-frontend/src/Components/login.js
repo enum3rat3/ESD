@@ -27,7 +27,6 @@ export default function Login() {
                 setAuthToken(res.data.jwt)
             }
         )
-        console.log(res);
         navigate('/home')
     };
 

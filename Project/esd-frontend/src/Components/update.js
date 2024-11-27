@@ -8,6 +8,9 @@ export default function Update() {
     const navigate = useNavigate();
     const location = useLocation();
     const data = location.state;
+    let currDate = new Date();
+    currDate = currDate.getFullYear() + "-" + parseInt(currDate.getMonth()+1) + "-" + currDate.getDate();
+
 
     const [bill, setBill] = useState({
         description: data.description,
@@ -85,11 +88,12 @@ export default function Update() {
                                 <label htmlFor="deadline" className='form-label'>
                                     Deadline
                                 </label>
-                                <input type={"text"}
+                                <input type={"date"}
                                        className="form-control"
                                        placeholder="Enter deadline"
                                        name="deadline"
-                                       defaultValue={data.deadline}
+                                       defaultValue={currDate}
+                                       min={currDate}
                                        onChange={(e) => onInputChange(e)}/>
                                 <br/>
                             </div>

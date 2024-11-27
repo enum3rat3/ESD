@@ -13,4 +13,7 @@ public class DomainService {
     public Domain createDomain(Domain domain) {
         return domainRepo.save(domain);
     }
+    public Domain getDomainById(int id) {
+        return domainRepo.findById(id).orElse(null);
+    }
 }

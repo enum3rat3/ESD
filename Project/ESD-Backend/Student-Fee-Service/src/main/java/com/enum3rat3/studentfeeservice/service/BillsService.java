@@ -1,7 +1,10 @@
 package com.enum3rat3.studentfeeservice.service;
 
+import com.enum3rat3.studentfeeservice.exception.DomainDoesNotExists;
+import com.enum3rat3.studentfeeservice.exception.StudentDoesNotExists;
 import com.enum3rat3.studentfeeservice.model.*;
 import com.enum3rat3.studentfeeservice.repo.BillsRepo;
+import com.enum3rat3.studentfeeservice.repo.DomainRepo;
 import com.enum3rat3.studentfeeservice.repo.StudentBillsRepo;
 import com.enum3rat3.studentfeeservice.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +29,15 @@ public class BillsService {
 
     @Autowired
     private StudentRepo studentRepo;
+    @Autowired
+    private DomainRepo domainRepo;
+    @Autowired
+    private DomainService domainService;
 
-    public void createBill(StudentBillDetails studentBillDetails) {
-
+    public void createBill(StudentBillDetails studentBillDetails) throws Exception{
+        Student s = studentService.getStudentById(studentBillDetails.getStudentID());
+        if (s == null)
+            throw new StudentDoesNotExists("Student not found");
         Bills bills = new Bills();
         bills.setDescription(studentBillDetails.getDescription());
         bills.setAmount(studentBillDetails.getAmount());
@@ -36,7 +45,6 @@ public class BillsService {
         bills.setDeadline(studentBillDetails.getDeadline());
         Bills b = billsRepo.save(bills);
 
-        Student s = studentService.getStudentById(studentBillDetails.getStudentID());
         StudentBills studentBills = new StudentBills();
         studentBills.setBillId(b.getId());
         studentBills.setStudentId(s.getStudentId());
@@ -80,25 +88,36 @@ public class BillsService {
         return false;
     }
 
-    public void createBillForDomain(DomainBillDetails domainBillDetails) {
+    public void createBillForDomain(DomainBillDetails domainBillDetails) throws Exception {
         int dID = domainBillDetails.getDomainId();
 
+        if (domainService.getDomainById(dID) == null)
+        {
+            throw new DomainDoesNotExists("Invalid Domain ID");
+        }
+
         List<Student> students= studentRepo.findAllByDomainId(dID);
+        if (students.size() != 0)
+        {
+            for(Student student : students) {
+                // Storing in bills table
+                Bills bill = new Bills();
+                bill.setDescription(domainBillDetails.getDescription());
+                bill.setAmount(domainBillDetails.getAmount());
+                bill.setBillDate(domainBillDetails.getBillDate());
+                bill.setDeadline(domainBillDetails.getDeadline());
+                Bills tempBill = billsRepo.save(bill);
 
-        for(Student student : students) {
-            // Storing in bills table
-            Bills bill = new Bills();
-            bill.setDescription(domainBillDetails.getDescription());
-            bill.setAmount(domainBillDetails.getAmount());
-            bill.setBillDate(domainBillDetails.getBillDate());
-            bill.setDeadline(domainBillDetails.getDeadline());
-            Bills tempBill = billsRepo.save(bill);
-
-            // Storing in student_bills table
-            StudentBills studentBills = new StudentBills();
-            studentBills.setBillId(tempBill.getId());
-            studentBills.setStudentId(student.getStudentId());
-            studentBillsRepo.save(studentBills);
+                // Storing in student_bills table
+                StudentBills studentBills = new StudentBills();
+                studentBills.setBillId(tempBill.getId());
+                studentBills.setStudentId(student.getStudentId());
+                studentBillsRepo.save(studentBills);
+            }
+        }
+        else
+        {
+            throw new Exception("No student present for given domain");
         }
     }
 
